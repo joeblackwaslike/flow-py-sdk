@@ -29,7 +29,7 @@ def create_account_template(
     else:
         cadence_contracts = cadence.Dictionary([])
 
-    tx = (
+    return (
         Tx(
             code="""
             import Crypto
@@ -57,8 +57,6 @@ def create_account_template(
         .add_arguments(cadence_public_keys)
         .add_arguments(cadence_contracts)
     )
-
-    return tx
 
 
 class TransactionTemplates:

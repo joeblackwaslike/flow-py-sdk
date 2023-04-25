@@ -34,9 +34,7 @@ class Value(ABC, object):
         pass
 
     def __eq__(self, other):
-        if isinstance(other, Value):
-            return str(self) == str(other)
-        return NotImplemented
+        return str(self) == str(other) if isinstance(other, Value) else NotImplemented
 
     def __hash__(self):
         """Overrides the default implementation"""

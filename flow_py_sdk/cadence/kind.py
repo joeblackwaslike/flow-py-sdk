@@ -34,9 +34,7 @@ class Kind(ABC, object):
         pass
 
     def __eq__(self, other):
-        if isinstance(other, Kind):
-            return str(self) == str(other)
-        return NotImplemented
+        return str(self) == str(other) if isinstance(other, Kind) else NotImplemented
 
     def __hash__(self):
         """Overrides the default implementation"""

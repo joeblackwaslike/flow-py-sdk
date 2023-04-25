@@ -60,5 +60,5 @@ typeTypeStr = "Type"
 capabilityTypeStr = "Capability"
 functionTypeStr = "Function"
 
-fix64_scale = int(8)
-fix64_factor = int(100_000_000)
+fix64_scale = 8
+fix64_factor = 100000000
