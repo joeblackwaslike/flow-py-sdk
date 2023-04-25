@@ -19,7 +19,7 @@ class Void(Value):
         super().__init__()
 
     def __str__(self):
-        return f"Void"
+        return "Void"
 
     def encode_value(self) -> dict:
         return {}

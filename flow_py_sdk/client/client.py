@@ -453,17 +453,14 @@ class AccessAPI(AccessAPIStub):
                 script=s, arguments=a, block_height=at_block_height
             )
         else:
-            log.debug(
-                f"Executing script at latest block",
-            )
+            log.debug("Executing script at latest block")
             result = await self.execute_script_at_latest_block(script=s, arguments=a)
 
-        log.debug(f"Script Executed")
+        log.debug("Script Executed")
 
-        if result is None or result is None:
+        if result is None:
             return None
-        cadence_value = json.loads(result, object_hook=cadence_object_hook)
-        return cadence_value
+        return json.loads(result, object_hook=cadence_object_hook)
 
     async def ping(self) -> PingResponse:
         """
@@ -533,7 +530,7 @@ class AccessAPI(AccessAPIStub):
         -------
         entities.TransactionResultResponse
         """
-        log.debug(f"Sending transaction")
+        log.debug("Sending transaction")
         if tx.reference_block_id is None:
             tx.reference_block_id = (await self.get_latest_block(is_sealed=False)).id
 
@@ -546,7 +543,7 @@ class AccessAPI(AccessAPIStub):
         if not wait_for_seal:
             return tx_result
 
-        log.info(f"Waiting for transaction to seal")
+        log.info("Waiting for transaction to seal")
 
         end_time = time.monotonic() + timeout
         while (
@@ -566,7 +563,7 @@ class AccessAPI(AccessAPIStub):
         if tx_result.error_message:
             raise Exception(tx_result.error_message)  # TODO wrap error
 
-        log.info(f"Got transaction seal")
+        log.info("Got transaction seal")
         return tx_result
 
 

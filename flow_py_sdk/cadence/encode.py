@@ -32,9 +32,7 @@ class CadenceJsonEncoder(json.JSONEncoder):
     def default(self, o: Any) -> Any:
         if isinstance(o, Value):
             return o.encode()
-        if isinstance(o, Kind):
-            return o.encode()
-        return super().default(o)
+        return o.encode() if isinstance(o, Kind) else super().default(o)
 
 
 def encode_arguments(arguments: list[Value]) -> list[bytes]:

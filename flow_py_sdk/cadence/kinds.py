@@ -166,7 +166,7 @@ class CompositeKind(Kind, metaclass=ABCMeta):
         initializers = value[c.initializersKey]
         fields = value[c.fieldsKey]
         return cls(
-            str(type_id),
+            type_id,
             [[ParameterKind.decode(j) for j in i] for i in initializers],
             [FieldKind.decode(i) for i in fields],
         )
@@ -359,11 +359,7 @@ class EnumKind(Kind):
         type_id = str(value[c.typeIdKey])
         type_ = value[c.typeKey]
         fields = value[c.fieldsKey]
-        return cls(
-            str(type_id),
-            decode(type_),
-            [FieldKind.decode(i) for i in fields],
-        )
+        return cls(type_id, decode(type_), [FieldKind.decode(i) for i in fields])
 
     def encode_kind(self) -> dict:
         return {

@@ -169,9 +169,8 @@ class AccountKey(object):
         """
 
         # Generate private key using provided Seed.
-        if seed == None:
+        if seed is None:
             sk = SigningKey.generate()
-            private_key = sk.to_string()
         else:
             secexp = randrange_from_seed__trytryagain(
                 seed, sign_algo.get_signing_curve().order
@@ -179,8 +178,7 @@ class AccountKey(object):
             sk = SigningKey.from_secret_exponent(
                 secexp, curve=sign_algo.get_signing_curve()
             )
-            private_key = sk.to_string()
-
+        private_key = sk.to_string()
         # Extract public Key (verifying Key) of generated private key.
         vk = sk.get_verifying_key()
         public_key = vk.to_string()

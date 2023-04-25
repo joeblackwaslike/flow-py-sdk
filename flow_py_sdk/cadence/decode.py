@@ -19,7 +19,7 @@ def add_cadence_kind_decoder(t: Type[Kind]):
 
 def decode(obj: [dict[Any, Any]]) -> Union[Value, Kind]:
     # json decoder starts from bottom up, so it's possible that this is already decoded
-    if isinstance(obj, Value) or isinstance(obj, Kind):
+    if isinstance(obj, (Value, Kind)):
         return obj
 
     # if there is an id key, it's already decoded and it is either a field or a parameter

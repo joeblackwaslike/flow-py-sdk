@@ -12,11 +12,10 @@ log = logging.getLogger(__name__)
 async def run_async(ctx: Config, examples: list[str]) -> Annotated[bool, "Success"]:
     if not examples:
         return await example_registry.run_all(ctx)
-    else:
-        success = True
-        for ex in examples:
-            success = success and await example_registry.run(ctx, ex)
-        return success
+    success = True
+    for ex in examples:
+        success = success and await example_registry.run(ctx, ex)
+    return success
 
 
 def run():

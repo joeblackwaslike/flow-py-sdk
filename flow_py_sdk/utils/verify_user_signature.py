@@ -18,7 +18,7 @@ async def verify_user_signature(
     *, client: AccessAPI, message: bytes, composite_signatures: list[CompositeSignature]
 ) -> bool:
     # if there is no signature return False
-    if len(composite_signatures) == 0:
+    if not composite_signatures:
         return False
 
     # it does not make sense for the signatures to be from different addresses
