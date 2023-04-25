@@ -1,3 +1,6 @@
+from __future__ import annotations
+import typing as t
+from typing import List, Dict, Any
 from abc import ABCMeta
 
 from flow_py_sdk.cadence import Kind
@@ -13,7 +16,7 @@ class OptionalKind(Kind):
     def __str__(self):
         return f"{self.value}?"
 
-    def encode_kind(self) -> dict:
+    def encode_kind(self) -> Dict[Any, Any]:
         return {c.typeKey: self.value.encode()}
 
     @classmethod
@@ -34,7 +37,7 @@ class VariableSizedArrayKind(Kind):
     def __str__(self):
         return f"[{self.value}]"
 
-    def encode_kind(self) -> dict:
+    def encode_kind(self) -> Dict[Any, Any]:
         return {c.typeKey: self.value.encode()}
 
     @classmethod
@@ -56,7 +59,7 @@ class ConstantSizedArrayKind(Kind):
     def __str__(self):
         return f"[{self.value};{self.size}]"
 
-    def encode_kind(self) -> dict:
+    def encode_kind(self) -> Dict[Any, Any]:
         return {
             c.typeKey: self.value.encode(),
             c.sizeKey: self.size,
@@ -82,7 +85,7 @@ class DictionaryKind(Kind):
     def __str__(self):
         return f"{{{self.key};{self.value}}}"
 
-    def encode_kind(self) -> dict:
+    def encode_kind(self) -> Dict[Any, Any]:
         return {
             c.keyKey: self.key.encode(),
             c.valueKey: self.value.encode(),
@@ -152,8 +155,8 @@ class CompositeKind(Kind, metaclass=ABCMeta):
     def __init__(
         self,
         type_id: str,
-        initializers: list[list[ParameterKind]],
-        fields: list[FieldKind],
+        initializers: List[List[ParameterKind]],
+        fields: List[FieldKind],
     ) -> None:
         super().__init__()
         self.type_id = type_id
@@ -171,7 +174,7 @@ class CompositeKind(Kind, metaclass=ABCMeta):
             [FieldKind.decode(i) for i in fields],
         )
 
-    def encode_kind(self) -> dict:
+    def encode_kind(self) -> Dict[Any, Any]:
         return {
             c.typeKey: "",
             c.typeIdKey: self.type_id,
@@ -245,7 +248,7 @@ class FunctionKind(Kind):
             decode(return_),
         )
 
-    def encode_kind(self) -> dict:
+    def encode_kind(self) -> Dict[Any, Any]:
         return {
             c.typeIdKey: self.type_id,
             c.parametersKey: [i.encode() for i in self.parameters],
@@ -275,7 +278,7 @@ class ReferenceKind(Kind):
             decode(type_),
         )
 
-    def encode_kind(self) -> dict:
+    def encode_kind(self) -> Dict[Any, Any]:
         return {
             c.authorizedKey: self.authorized,
             c.typeKey: self.type.encode(),
@@ -290,7 +293,7 @@ class ReferenceKind(Kind):
 
 
 class RestrictedKind(Kind):
-    def __init__(self, type_id: str, type_: Kind, restrictions: list[Kind]) -> None:
+    def __init__(self, type_id: str, type_: Kind, restrictions: List[Kind]) -> None:
         super().__init__()
         self.type_id = type_id
         self.type = type_
@@ -307,7 +310,7 @@ class RestrictedKind(Kind):
             [decode(i) for i in restrictions],
         )
 
-    def encode_kind(self) -> dict:
+    def encode_kind(self) -> Dict[Any, Any]:
         return {
             c.typeIdKey: self.type_id,
             c.typeKey: self.type.encode(),
@@ -334,7 +337,7 @@ class CapabilityKind(Kind):
             decode(type_),
         )
 
-    def encode_kind(self) -> dict:
+    def encode_kind(self) -> Dict[Any, Any]:
         return {
             c.typeKey: self.type.encode(),
         }
@@ -365,7 +368,7 @@ class EnumKind(Kind):
             [FieldKind.decode(i) for i in fields],
         )
 
-    def encode_kind(self) -> dict:
+    def encode_kind(self) -> Dict[Any, Any]:
         return {
             c.typeKey: self.type_.encode(),
             c.typeIdKey: self.type_id,

@@ -1,12 +1,14 @@
-from typing import Any, Callable, Type, Union
+from __future__ import annotations
+import typing as t
+from typing import Any, Callable, Type, Union, Dict
 
 from flow_py_sdk.cadence.value import Value
 from flow_py_sdk.cadence.kind import Kind
 
 import flow_py_sdk.cadence.constants as c
 
-_cadence_decoders: dict[str, Callable[[Any], Value]] = {}
-_cadence_kind_decoders: dict[str, Callable[[Any], Kind]] = {}
+_cadence_decoders: Dict[str, Callable[[Any], Value]] = {}
+_cadence_kind_decoders: Dict[str, Callable[[Any], Kind]] = {}
 
 
 def add_cadence_decoder(t: Type[Value]):
@@ -17,7 +19,7 @@ def add_cadence_kind_decoder(t: Type[Kind]):
     _cadence_kind_decoders[t.kind_str()] = t.decode
 
 
-def decode(obj: [dict[Any, Any]]) -> Union[Value, Kind]:
+def decode(obj: Dict[Any, Any]) -> Union[Value, Kind]:
     # json decoder starts from bottom up, so it's possible that this is already decoded
     if isinstance(obj, Value) or isinstance(obj, Kind):
         return obj
@@ -26,7 +28,7 @@ def decode(obj: [dict[Any, Any]]) -> Union[Value, Kind]:
     if c.idKey in obj:
         return obj
 
-    # if there is no type key we cant decode it directly, but it could be part of a dictionary or composite or path
+    # if there is no type key we cant decode it directly, but it could be part of a t.Dictionary or composite or path
     if c.kindKey not in obj and c.typeKey not in obj:
         return obj
 
@@ -45,5 +47,5 @@ def decode(obj: [dict[Any, Any]]) -> Union[Value, Kind]:
     raise NotImplementedError()
 
 
-def cadence_object_hook(obj: [dict[Any, Any]]) -> Any:
+def cadence_object_hook(obj: Dict[Any, Any]) -> Any:
     return decode(obj)

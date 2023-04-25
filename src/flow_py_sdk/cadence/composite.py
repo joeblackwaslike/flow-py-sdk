@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+import typing as t
 from abc import ABCMeta
 
 import flow_py_sdk.cadence.constants as c
@@ -8,7 +8,7 @@ from flow_py_sdk.cadence.value import Value
 
 
 class Composite(Value, metaclass=ABCMeta):
-    def __init__(self, id_: str, field_pairs: list[(str, Value)]):
+    def __init__(self, id_: str, field_pairs: t.List[(str, Value)]):
         super().__init__()
 
         self.fields: dict[str, Value] = {f[0]: f[1] for f in field_pairs}

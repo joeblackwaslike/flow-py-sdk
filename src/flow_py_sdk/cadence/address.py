@@ -1,9 +1,21 @@
 from __future__ import annotations
+import typing as t
 
 from flow_py_sdk.cadence.value import Value
 import flow_py_sdk.cadence.constants as c
 
 from flow_py_sdk.exceptions import NotAddressError
+
+
+def removeprefix(val, prefix):
+    if val.startswith(prefix):
+        return val[len(prefix):]
+    return val[:]
+
+def removesuffix(val, suffix):
+    if val.endswith(suffix):
+        return val[:-len(suffix)]
+    return val[:]
 
 
 class Address(Value):
@@ -19,7 +31,7 @@ class Address(Value):
 
     @classmethod
     def from_hex(cls, value: str) -> "Address":
-        return Address(bytes.fromhex(value.removeprefix(Address.address_prefix)))
+        return Address(bytes.fromhex(removeprefix(value, Address.address_prefix)))
 
     def hex(self) -> str:
         return self.bytes.hex()
@@ -30,7 +42,7 @@ class Address(Value):
     def __str__(self) -> str:
         return self.hex_with_prefix()
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {
             c.valueKey: self.hex_with_prefix(),
         }
@@ -47,7 +59,7 @@ class Address(Value):
         return c.addressTypeStr
 
     @classmethod
-    def convert_to_bytes(cls, address: bytes | Address | str) -> bytes:
+    def convert_to_bytes(cls, address: t.Union[bytes, Address, str]) -> bytes:
         """
         Converts an address to bytes if it is not already bytes.
         Parameters

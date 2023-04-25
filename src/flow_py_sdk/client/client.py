@@ -1,10 +1,13 @@
+from __future__ import annotations
+
 import asyncio
 import json
 import logging
 from types import TracebackType
-from typing import Optional, Type, Annotated, List, Union
-
+from typing import Optional, Type, List, Union
 import time
+
+from typing_extensions import Annotated
 from grpclib.client import Channel
 from grpclib.config import Configuration
 from grpclib.encoding.base import CodecBase, StatusDetailsCodecBase
@@ -349,7 +352,7 @@ class AccessAPI(AccessAPIStub):
 
     async def get_events_for_height_range(
         self, *, type: str = "", start_height: int = 0, end_height: int = 0
-    ) -> list[entities.EventsResponseResult]:
+    ) -> List[entities.EventsResponseResult]:
         """
         Query on blocks in specific height.
         The script is executed on an execution node and the return value is encoded using the JSON-Cadence data interchange format.
@@ -376,7 +379,7 @@ class AccessAPI(AccessAPIStub):
 
     async def get_events_for_block_i_ds(
         self, *, type: str = "", block_ids: List[bytes] = []
-    ) -> list[entities.EventsResponseResult]:
+    ) -> List[entities.EventsResponseResult]:
         """
         Query on blocks with specific IDs.
         The script is executed on an execution node and the return value is encoded using the JSON-Cadence data interchange format.

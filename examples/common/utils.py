@@ -1,7 +1,6 @@
-from typing import Annotated
-
 import ecdsa
-
+from typing import Dict, List
+from typing_extensions import Annotated
 from examples.common.config import Config
 from flow_py_sdk import (
     cadence,
@@ -27,7 +26,7 @@ async def random_account(
     *,
     client: AccessAPI,
     ctx: Config,
-    contracts: dict[Annotated[str, "name"], Annotated[str, "source"]] = None,
+    contracts: Dict[Annotated[str, "name"], Annotated[str, "source"]] = None,
 ) -> (cadence.Address, AccountKey, Signer):
     """
     Generate a random account.
@@ -59,9 +58,9 @@ async def random_account_with_weights(
     *,
     client: AccessAPI,
     ctx: Config,
-    weights: list[int],
-    contracts: dict[Annotated[str, "name"], Annotated[str, "source"]] = None,
-) -> (cadence.Address, list[AccountKey], list[Signer]):
+    weights: List[int],
+    contracts: Dict[Annotated[str, "name"], Annotated[str, "source"]] = None,
+) -> (cadence.Address, List[AccountKey], List[Signer]):
     """
     Generate a random account with a given set of weights.
 

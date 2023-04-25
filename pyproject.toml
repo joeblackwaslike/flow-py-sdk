@@ -1,37 +1,48 @@
-[tool.poetry]
+[project]
 name = "flow-py-sdk"
-version = "0.0.0"
+version = "0.1.0"
 description = "A python SKD for the flow blockchain"
-authors = ["Janez Podhostnik <janez.podhostnik@gmail.com>"]
-license = "MIT"
 readme = "README.md"
-repository = "https://github.com/janezpodhostnik/flow-py-sdk"
+requires-python = ">=3.7"
+dependencies = [
+    "betterproto[compiler]==v2.0.0-beta5",
+    "ecdsa==0.18",
+    "rlp==3.0",
+    "toml",
+    "coloredlogs",
+    "grpclib>=0.4",
+    "importlib-resources==1.0.2",
+    "typing_extensions>=4.5.0",
+]
 
-[tool.poetry.dependencies]
-python = "^3.9"
-betterproto = {extras = ["compiler"], version = "v2.0.0-beta5"}
-grpcio-tools = "^1.51"
-ecdsa = "^v0.18"
-rlp = "^3.0"
-grpclib = "^0.4"
+# [tool.poetry.dependencies]
+# betterproto = {extras = ["compiler"], version = "v2.0.0-beta5"}
+# ecdsa = "^v0.18"
+# rlp = "^3.0"
+# grpclib = "^0.4"
+# importlib-resources = "1.0.2"
 
-[tool.poetry.dev-dependencies]
-coloredlogs = "^15.0"
-toml = "^0.10"
-black = "^23.1"
-pytest = "^7.2"
-mkdocs = "^1.4"
-mkdocs-material = "^9.0"
-mkdocstrings = "^0.20"
-coverage = "^7.1"
+[project.optional-dependencies]
+dev = [
+    "black",
+]
+test = [
+    "pytest",
+    "coverage",
 
-[tool.poetry-dynamic-versioning]
-enable = true
-vcs = "git"
+]
+docs = [
+    "coloredlogs",
+    "toml",
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings",
+]
 
 [build-system]
-requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
 
-[tool.poetry.scripts]
+
+[project.scripts]
 examples = 'examples.main:run'

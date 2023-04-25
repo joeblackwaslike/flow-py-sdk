@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import logging
 
 from flow_py_sdk.cadence.types import Value

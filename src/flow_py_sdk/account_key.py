@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from typing import Optional
 from ecdsa import SigningKey
 from ecdsa.util import randrange_from_seed__trytryagain

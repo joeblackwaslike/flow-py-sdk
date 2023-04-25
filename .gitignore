@@ -23,6 +23,7 @@ fabric.properties
 # Editor-based Rest Client
 .idea
 
+.venv
 
 ### Python ###
 # Byte-compiled / optimized / DLL files

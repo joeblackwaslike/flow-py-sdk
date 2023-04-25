@@ -1,4 +1,6 @@
-from typing import Annotated
+from __future__ import annotations
+from typing import List, Dict, Any
+from typing_extensions import Annotated
 
 import flow_py_sdk.cadence as cadence
 from flow_py_sdk.account_key import AccountKey
@@ -7,11 +9,11 @@ from flow_py_sdk.tx import Tx, ProposalKey
 
 def create_account_template(
     *,
-    keys: list[AccountKey],
+    keys: List[AccountKey],
     reference_block_id: bytes = None,
     payer: cadence.Address = None,
     proposal_key: ProposalKey = None,
-    contracts: dict[Annotated[str, "name"], Annotated[str, "source"]] = None
+    contracts: Dict[Annotated[str, "name"], Annotated[str, "source"]] = None
 ) -> Tx:
     if keys:
         cadence_public_keys = cadence.Array([k.crypto_key_list_entry() for k in keys])

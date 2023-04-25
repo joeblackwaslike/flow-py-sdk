@@ -1,7 +1,7 @@
 import logging
 from abc import abstractmethod, ABCMeta
-from typing import Annotated
 
+from typing_extensions import Annotated
 from examples.common.config import Config
 
 log = logging.getLogger(__name__)

@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+import typing as t
 from abc import ABCMeta
 
 import flow_py_sdk.cadence.constants as c
@@ -11,7 +11,7 @@ class SimpleKind(Kind, metaclass=ABCMeta):
     def __init__(self) -> None:
         super().__init__()
 
-    def encode_kind(self) -> dict:
+    def encode_kind(self) -> t.Dict[t.Any, t.Any]:
         return {}
 
     def __str__(self):

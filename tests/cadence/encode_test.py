@@ -1,6 +1,8 @@
+from __future__ import annotations
+from typing import List
 import json
 import unittest
-from ctypes import Union
+
 from dataclasses import dataclass
 from flow_py_sdk import cadence
 
@@ -17,7 +19,7 @@ class TestEncode(unittest.TestCase):
     Cadence encoding/decoding tests were adapted from: https://github.com/onflow/cadence/blob/master/encoding/json/encoding_test.go
     """
 
-    def _encodeAndDecodeAll(self, tests: list[_EncodeTestParams]):
+    def _encodeAndDecodeAll(self, tests: List[_EncodeTestParams]):
         for test in tests:
             with self.subTest(msg=test.name):
                 self._encodeAndDecode(test.val, test.expected)

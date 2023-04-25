@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from .decode import cadence_object_hook
 from .encode import CadenceJsonEncoder, encode_arguments
 from .types import (

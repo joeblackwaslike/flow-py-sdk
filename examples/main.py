@@ -2,7 +2,8 @@ import asyncio
 import logging
 import pathlib
 import sys
-from typing import Annotated
+
+from typing_extensions import Annotated
 
 from examples.common import Config, example_registry
 

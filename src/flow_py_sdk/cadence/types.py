@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+import typing as t
 from distutils.util import strtobool
 from typing import (
     List,
@@ -21,7 +21,7 @@ class Void(Value):
     def __str__(self):
         return f"Void"
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {}
 
     @classmethod
@@ -41,7 +41,7 @@ class Optional(Value):
     def __str__(self):
         return f"Optional[{str(self.value)}]"
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: self.value.encode() if self.value is not None else None}
 
     @classmethod
@@ -63,7 +63,7 @@ class Bool(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: self.value}
 
     @classmethod
@@ -85,7 +85,7 @@ class String(Value):
     def __str__(self):
         return self.value
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: self.value}
 
     @classmethod
@@ -105,7 +105,7 @@ class Int(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -125,7 +125,7 @@ class Int8(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -145,7 +145,7 @@ class Int16(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -165,7 +165,7 @@ class Int32(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -185,7 +185,7 @@ class Int64(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -205,7 +205,7 @@ class Int128(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -225,7 +225,7 @@ class Int256(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -245,7 +245,7 @@ class UInt(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -265,7 +265,7 @@ class UInt8(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -285,7 +285,7 @@ class UInt16(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -305,7 +305,7 @@ class UInt32(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -325,7 +325,7 @@ class UInt64(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -345,7 +345,7 @@ class UInt128(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -365,7 +365,7 @@ class UInt256(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -385,7 +385,7 @@ class Word8(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -405,7 +405,7 @@ class Word16(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -425,7 +425,7 @@ class Word32(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -445,7 +445,7 @@ class Word64(Value):
     def __str__(self):
         return str(self.value)
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self.value)}
 
     @classmethod
@@ -467,7 +467,7 @@ class Fix64(Value):
         fraction = int(abs(self.value) % c.fix64_factor)
         return f"{integer}.{fraction:08d}"
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self)}
 
     @classmethod
@@ -493,7 +493,7 @@ class UFix64(Value):
         fraction = int(self.value % c.fix64_factor)
         return f"{integer}.{fraction:08d}"
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: str(self)}
 
     @classmethod
@@ -514,7 +514,7 @@ class Array(Value):
     def __str__(self):
         return f'[{",".join([str(item) for item in self.value])}]'
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {c.valueKey: [i.encode() for i in self.value]}
 
     @classmethod
@@ -543,7 +543,7 @@ class Dictionary(Value):
             f'{{{",".join([f"{{{item.key}:{item.value}}}" for item in self.value])}}}'
         )
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {
             c.valueKey: [
                 {
@@ -579,7 +579,7 @@ class Path(Value):
     def __str__(self):
         return f"/{self.domain}/{self.identifier}"
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {
             c.valueKey: {c.domainKey: self.domain, c.identifierKey: self.identifier}
         }
@@ -605,7 +605,7 @@ class TypeValue(Value):
     def __str__(self):
         return f"Type<{str(self.type_) if self.type_ else ''}>()"
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {
             c.valueKey: {
                 c.staticTypeKey: self.type_.encode() if self.type_ else "",
@@ -635,7 +635,7 @@ class Capability(Value):
         type_arg = "" if self.borrow_type is None else f"<{self.borrow_type}>"
         return f"Capability{type_arg}(address: {self.address}, path: {self.path})"
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {
             c.valueKey: {
                 c.pathKey: self.path.encode(),
@@ -664,7 +664,7 @@ class Function(Value):
     def __str__(self):
         return f"Function{self.function_type}"
 
-    def encode_value(self) -> dict:
+    def encode_value(self) -> t.Dict[t.Any, t.Any]:
         return {
             c.valueKey: {
                 c.functionTypeKey: self.function_type.encode(),
